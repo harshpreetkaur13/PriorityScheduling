@@ -60,5 +60,27 @@ int main()
     {
        a[i]=s_obj[i].burst_t;
     }
+    s_obj[9].burst_t=9999;
+    
+    for(t=s_obj[0].arrival_t; t<=b_t+1;)
+    {
+       peak=9;
+       for(i=0;i<n;i++)
+       {
+          if(s_obj[i].arrival_t <= t && s_obj[i].burst_t < s_obj[peak].burst_t && s_obj[i].flag != 1)
+	  {
+	      peak = i;
+	  }
+	  if(s_obj[peak].burst_t == 0 && s_obj[i].flag != 1)
+	  {
+	      s_obj[i].flag=1;
+	      s_obj[peak].completion_t=t;
+	      s_obj[peak].burst_t=9999;
+	      printf("P%d completes in %d\n",s_obj[i].process_no,s_obj[peak].completion_t);
+	  }
+       }
+       t++;
+       (s_obj[peak].burst_t)--;
+    }
 }
   
