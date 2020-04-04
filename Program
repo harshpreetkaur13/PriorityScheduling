@@ -82,5 +82,23 @@ int main()
        t++;
        (s_obj[peak].burst_t)--;
     }
+    
+    for(i=0;i<n;i++)
+    {
+       s_obj[i].taround_time=(s_obj[i].completion_t)-(s_obj[i].arrival_t);
+       avg_taround_time=avg_taround_time+s_obj[i].taround_time;
+       s_obj[i].wait_t=((s_obj[i].taround_time)-a[i]);
+       avg_w_t=avg_w_t+s_obj[i].wait_t;
+    }
+    
+    printf("PNO\tAT\tCT\tTA\tWTt\n");
+    
+    for(i=0;i<n;i++)
+    {
+       printf("P%d\t%d\t%d\t%d\t%d\n",s_obj[i].process_no,s_obj[i].arrival_t,s_obj[i].completion_t,s_obj[i].taround_time,s_obj[i].wait_t);
+    }
+    
+    printf("Average Turn Around Time: %f\t\n\n",avg_taround_time);
+    printf("Average Waiting Time: \t %f\t\n",avg_w_t);
 }
   
